@@ -1,7 +1,9 @@
 "use client";
 
+import Button from "@/app/components/nav/Products/Button";
 import SetColor from "@/app/components/nav/Products/SetColor";
 import SetQuantity from "@/app/components/nav/Products/SetQuantity";
+import ProductImage from "@/app/components/nav/Products/ProductImage";
 import { Rating } from "@mui/material";
 import { useCallback, useState } from "react";
 
@@ -42,7 +44,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     price: product.price,
   });
 
-  console.log(cartProduct)
+  console.log(cartProduct);
 
   const productRating =
     product.reviews.reduce(
@@ -76,7 +78,11 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-      <div>Images</div>
+      <ProductImage
+        cartProduct={cartProduct}
+        product={product}
+        handleColorSelect={handleColorSelect}
+      />
       <div className="flex flex-col gap-1 text-slate-500 text-sm">
         <h2 className="text-3xl font-medium text-slate-700">{product.name}</h2>
         <div className="flex items-center gap-2">
@@ -106,13 +112,20 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
         <Horizontal />
         <div>
           <SetQuantity
-          cartProduct={cartProduct}
-          handleQtyDecrease={handleQtyDecrease}
-          handleQtyIncrease={handleQtyIncrease}
+            cartProduct={cartProduct}
+            handleQtyDecrease={handleQtyDecrease}
+            handleQtyIncrease={handleQtyIncrease}
           />
         </div>
         <Horizontal />
-        <div>Add to Cart</div>
+        <div className="max-w-[300px]">
+          <Button
+            label="Add To Cart"
+            onClick={() => {
+              // Add to cart logic here
+            }}
+          />
+        </div>
         <Horizontal />
       </div>
     </div>

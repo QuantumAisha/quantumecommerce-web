@@ -2,18 +2,47 @@
 
 import { IconType } from "react-icons";
 
-interface ButtonProps{
-    label: string,
-    disabled?: boolean,
-    outline?: boolean,
-    small?: boolean,
-    custom?: string,
-    icons?: IconType
-    
+interface ButtonProps {
+    label: string;
+    disabled?: boolean;
+    outline?: boolean;
+    small?: boolean;
+    custom?: string;
+    icon?: IconType;
+    onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Button = () => {
-    return ( <div></div> );
+const Button: React.FC<ButtonProps> = ({
+    label,
+    disabled,
+    outline,
+    small,
+    custom,
+    icon: Icon,
+    onClick,
+}) => {
+    return (
+        <button
+            onClick={onClick}
+            disabled={disabled}
+            className={`
+             rounded-md
+             hover:opacity-80 
+             transition  
+             ${outline? 'bg-white' :'bg-slate-700'}
+             ${outline? 'text-slate-700' :'text-white'}
+             ${small ? 'text-sm font-light'
+                : 'text-md font-semibold'
+             }
+             ${small ? 'py-1 px-2 border-[1px]' :'py-3 px-4 border-2'}
+                ${disabled ? 'opacity-70 cursor-not-allowed' 
+                : ''}
+                flex items-center gap-2
+            `}
+        >
+            {Icon && <Icon size={small ? 16 : 24} />}
+            {label}
+        </button>
+    );
 }
- 
 export default Button;
