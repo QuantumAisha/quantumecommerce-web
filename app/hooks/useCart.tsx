@@ -47,6 +47,8 @@ export const CartContextProvider = (props: Props) => {
     setCartTotalQty((prevQty) => prevQty + 1);
   }, []);
 
+  
+
   const value = {
     CartTotalQty,
     cartProducts,
